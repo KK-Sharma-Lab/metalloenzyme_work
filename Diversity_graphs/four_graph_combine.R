@@ -1,14 +1,14 @@
 library('vegan')
 
-#setwd("/home/pratik/Dissimilarity_graphs/")
+#setwd("/path/to/working/directory/")
 
-genus= read.csv('/home/drkksharma/Documents/MTX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
+genus= read.csv('/path/to/MTX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
 
-meta= read.csv('/home/drkksharma/Documents/MTX_combo_meta.txt', sep='\t', comment='', head=T)
+meta= read.csv('/path/to/MTX_combo_meta.txt', sep='\t', comment='', head=T)
 
-genus1= read.csv('/home/drkksharma/Documents/MGX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
+genus1= read.csv('/path/to/MGX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
 
-meta1= read.csv('/home/drkksharma/Documents/MGX_combo_meta.txt', sep='\t', comment='', head=T)
+meta1= read.csv('/path/to/MGX_combo_meta.txt', sep='\t', comment='', head=T)
 
 genus <- t(genus)
 dim(genus)
@@ -83,7 +83,7 @@ d.bray.nonibd1[is.na(d.bray.nonibd1)] <- 0
 #==========================================================================================#
 #
 #combining the graphs
-png("/home/drkksharma/Desktop/sex_merge_graph.png", width = 9, height = 8, units='in', res=900)
+png("sex_merge_graph.png", width = 9, height = 8, units='in', res=900)
 par(mfrow = c(2, 2), mar=c(4.5, 4, 3, 1.8), mgp=c(1.7, 0.8, 0))
 
 mod <- vegan::betadisper(as.dist(d.bray.nonibd), as.factor(nonibd$sex))
@@ -112,7 +112,7 @@ dev.off()
 
 
 #combined graph of age_grp
-png("/home/drkksharma/Desktop/age_merge_graph.png", width = 9, height = 8, units='in', res=900)
+png("age_merge_graph.png", width = 9, height = 8, units='in', res=900)
 par(mfrow = c(2, 2), mar=c(4.5, 4, 3, 1.8), mgp=c(1.7, 0.8, 0))
 mod <- vegan::betadisper(as.dist(d.bray.nonibd), as.factor(nonibd$Age_grp))
 op <- par(family = "serif")
