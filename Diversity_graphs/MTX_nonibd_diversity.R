@@ -1,10 +1,10 @@
 library('vegan')
 
-#setwd("/home/pratik/Dissimilarity_graphs/")
+#setwd("/path/to/working/directory/")
 
-genus= read.csv('/home/pratik/Documents/diversity/MTX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
+genus= read.csv('/path/to/MTX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
 
-meta= read.csv('/home/pratik/Documents/MTX_combo_meta.txt', sep='\t', comment='', head=T)
+meta= read.csv('/path/to/MTX_combo_meta.txt', sep='\t', comment='', head=T)
 
 genus <- t(genus)
 dim(genus)
@@ -38,7 +38,7 @@ pc.euc <- cmdscale(d.euc, k=2)
 
 
 mod <- vegan::betadisper(as.dist(d.bray), as.factor(nonibd$Sex))
-png("/home/pratik/Dissimilarity_graphs/MTX/Taxonomic Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes sex-wise (Bray-Curtis distance).png", width = 9, height = 8, units='in', res=900)
+png("Taxonomic Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes sex-wise (Bray-Curtis distance).png", width = 9, height = 8, units='in', res=900)
 op <- par(family = "serif")
 plot(mod, ellipse = TRUE, hull= FALSE, main=" ", sub=NULL, xlim = c(-0.3, 0.2), segments = FALSE, label = FALSE,  pch = c(19,19), col=c("indianred2", "steelblue2"))
 legend( 0.4,0.01, legend=c("Female", "Male"), col=c("indianred2", "steelblue2"), box.lty=1, pch = c(19,19) )
@@ -48,7 +48,7 @@ anova(mod)
 
 
 mod <- vegan::betadisper(as.dist(d.bray), as.factor(nonibd$Age_grp))
-png("/home/pratik/Dissimilarity_graphs/MTX/Taxonomic Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes age-wise (Bray-Curtis distance).png", width = 9, height = 8, units='in', res=900)
+png("Taxonomic Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes age-wise (Bray-Curtis distance).png", width = 9, height = 8, units='in', res=900)
 op <- par(family = "serif")
 plot(mod, ellipse = TRUE, hull= FALSE, main=" ", sub=NULL, xlim = c(-0.3, 0.2), segments = FALSE, label = FALSE,  pch = c(19,19,19), col=c("indianred2", "steelblue2", "palegreen3"))
 legend( 0.4,0.01, legend=c("Adult", "Old", "Young"), col=c("indianred2", "steelblue2", "palegreen3"), box.lty=1, pch = c(19,19,19) )
@@ -56,7 +56,7 @@ dev.off()
 
 anova(mod)
 
-png("/home/pratik/Dissimilarity_graphs/MTX/Taxonomic Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes sex-wise (Euclidean distance).png", width = 8, height = 8, units='in', res=900)
+png("Taxonomic Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes sex-wise (Euclidean distance).png", width = 8, height = 8, units='in', res=900)
 par(mar=c(5.1, 4.1, 4.1, 8.3))
 op <- par(family = "serif")
 #Create a blank plot for the nmds
@@ -78,7 +78,7 @@ legend("topright",
 dev.off()
 
 
-png("/home/pratik/Dissimilarity_graphs/MTX/Taxonomic Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes age-wise (Euclidean distance).png", width = 8, height = 8, units='in', res=900)
+png("Taxonomic Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes age-wise (Euclidean distance).png", width = 8, height = 8, units='in', res=900)
 par(mar=c(5.1, 4.1, 4.1, 8.3))
 #Create a blank plot for the nmds
 op <- par(family = "serif")
@@ -103,9 +103,9 @@ legend("topright",
 dev.off()
 
 ###################################################################################################################################
-genus1= read.csv('/home/pratik/Documents/Enz_diversity/MTX_combo.csv', sep='\t', comment=',', head=T, row.names=1)
+genus1= read.csv('/path/to/MTX_combo.csv', sep='\t', comment=',', head=T, row.names=1)
 
-meta1= read.csv('/home/pratik/Documents/MTX_combo_meta.txt', sep='\t', comment='', head=T)
+meta1= read.csv('/path/to/MTX_combo_meta.txt', sep='\t', comment='', head=T)
 
 genus1 <- t(genus1)
 dim(genus1)
@@ -143,7 +143,7 @@ pc.bray1 <- cmdscale(d.bray1,k=2)
 
 
 mod1 <- vegan::betadisper(as.dist(d.bray1), as.factor(nonibd$sex))
-png("/home/pratik/Dissimilarity_graphs/MTX/Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes sex-wise (Bray-Curtis distance).png", width = 8, height = 8, units='in', res=900)
+png("Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes sex-wise (Bray-Curtis distance).png", width = 8, height = 8, units='in', res=900)
 op <- par(family = "serif")
 plot(mod1, ellipse = TRUE, hull= FALSE, main=" ", sub=NULL, xlim = c(-0.3, 0.2), segments = FALSE, label = FALSE,  pch = c(19,19), col=c("indianred2", "steelblue2"))
 legend( 0.2,0.4, legend=c("Female", "Male"), col=c("indianred2", "steelblue2"), box.lty=1, pch = c(19,19) )
@@ -151,7 +151,7 @@ dev.off()
 anova(mod1)
 
 mod1 <- vegan::betadisper(as.dist(d.bray1), as.factor(nonibd$Age_grp))
-png("/home/pratik/Dissimilarity_graphs/MTX/Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes age-wise (Bray-Curtis distance).png", width = 9, height = 8, units='in', res=900)
+png("Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes age-wise (Bray-Curtis distance).png", width = 9, height = 8, units='in', res=900)
 op <- par(family = "serif")
 plot(mod1, ellipse = TRUE, hull= FALSE, main=" ", sub=NULL, xlim = c(-0.3, 0.2), segments = FALSE, label = FALSE,  pch = c(19,19,19), col=c("indianred2", "steelblue2", "palegreen3"))
 legend( 0.2,0.4, legend=c("Adult", "Old", "Young"), col=c("indianred2", "steelblue2", "palegreen3"), box.lty=1, pch = c(19,19,19) )
@@ -160,7 +160,7 @@ dev.off()
 anova(mod1)
 
 
-png("/home/pratik/Dissimilarity_graphs/MTX/Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes sex-wise (Euclidean distance).png", width = 8, height = 8, units='in', res=900)
+png("Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes sex-wise (Euclidean distance).png", width = 8, height = 8, units='in', res=900)
 par(mar=c(5.1, 4.1, 4.1, 8.3))
 op <- par(family = "serif")
 #Create a blank plot for the nmds
@@ -182,7 +182,7 @@ legend("topright",
 dev.off()
 
 
-png("/home/pratik/Dissimilarity_graphs/MTX/Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes age-wise (Euclidean distance).png", width = 8, height = 8, units='in', res=900)
+png("Beta diversity of nonIBD metatranscriptomes consisting metalloenzymes age-wise (Euclidean distance).png", width = 8, height = 8, units='in', res=900)
 par(mar=c(5.1, 4.1, 4.1, 8.3))
 #Create a blank plot for the nmds
 op <- par(family = "serif")
