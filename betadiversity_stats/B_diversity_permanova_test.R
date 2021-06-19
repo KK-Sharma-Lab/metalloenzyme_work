@@ -1,10 +1,9 @@
 library(vegan)
-library("gplots")
 
 #change the abundance table and meta data file accordingly
 
-genus= read.csv('/home/pratik/Documents/Enz_diversity/MTX_combo.csv', sep='\t', comment=',', head=T, row.names = 1)
-meta= read.csv('/home/pratik/Documents/MTX_combo_meta.txt', sep='\t', comment='', head=T)
+genus= read.csv('/path/to/abundance/table', sep='\t', comment=',', head=T, row.names = 1)
+meta= read.csv('/path/to/meta/data/file', sep='\t', comment='', head=T)
 
 genus <- t(genus)
 dim(genus)
@@ -42,8 +41,7 @@ d.bray.nonibd <- vegdist(genus_nonibd, na.rm=TRUE)
 d.bray.nonibd[is.na(d.bray.nonibd)] <- 0
 
 dist.bray <- as.data.frame(as.matrix(d.bray))
-write.csv(dist.bray, file="/home/pratik/Desktop/bray1.csv")
-heatmap.2(genus)
+
 #anosim test
 anosim(d.bray, meta$sex, permutations = 1000)
 #permanova test
