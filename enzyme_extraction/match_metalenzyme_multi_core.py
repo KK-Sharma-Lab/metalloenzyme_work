@@ -6,8 +6,8 @@ import re
 
 
 def multiprocessing_func(x):
-    samtsv= f"/home/pratik/Downloads/HMP2_healthy/{x}_humann2/{x}_ecs.tsv"
-    output= f"/home/pratik/Downloads/multi/{x}_me.xlsx"
+    samtsv= f"/path/to/HMP2_healthy/{x}_humann2/{x}_ecs.tsv" #HUMANn2 product files having enzyme info
+    output= f"/path/to/metalloenzymes/{x}_me.xlsx"#output after extracting metalloenzymes from each sample
     
 
     sample = pd.read_csv(samtsv,delimiter='\t',encoding='utf-8')
@@ -36,7 +36,7 @@ def multiprocessing_func(x):
 if __name__ == '__main__':
     starttime = time.time()
     
-    enz='/home/pratik/Downloads/metals_cofactors_expasy.xlsx';
+    enz='/path/to/metalloenzyme_list_from_ExPaSy.xlsx';
 
     eclist = pd.read_excel(enz)
 
@@ -45,7 +45,7 @@ if __name__ == '__main__':
     ec2=eclist.Enzyme_name
 
     
-    folder_list=pd.read_excel('/home/pratik/Documents/Folder_list2.xlsx')
+    folder_list=pd.read_excel('path/to/sample_name_list.xlsx')
 
     folder1=folder_list.Folder_id
 
