@@ -2,10 +2,10 @@ library(vegan)
 library(matrixStats)
 
 
-genus= read.csv('/home/drkksharma/Desktop/Beta_diversity_analysis/taxa_diversity/MTX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
+genus= read.csv('/path/to/MTX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
 
 #in this meta, remove the other sample data only keep the 1 samples from each subject after week 20 (nonIBD)
-meta= read.csv('/home/drkksharma/Desktop/Beta_diversity_analysis/MTX_combo_meta1.txt', sep='\t', comment='', head=T)
+meta= read.csv('/path/to/MTX_20_week_meta.txt', sep='\t', comment='', head=T)
 
 genus <- t(genus)
 genus <- genus[,colMeans(genus > 0) >= .1]
@@ -25,7 +25,7 @@ meta$ref_set<- (meta$diagnosis == "nonIBD") & (meta$week_num >= 20)
 meta$ref_set
 
 rand <- as.data.frame(as.matrix(meta)) 
-write.csv(rand, '/home/drkksharma/Desktop/meta.csv')
+write.csv(rand, 'meta.csv')
 
 dim(meta)
 dim(ref_set)
@@ -34,18 +34,18 @@ meta$activity_index <- colMedians(as.matrix(D), keep.names=TRUE)
 meta$activity_index
 
 rand <- as.data.frame(as.matrix(meta)) 
-write.csv(rand, '/home/drkksharma/Desktop/meta.csv')
+write.csv(rand, 'meta.csv')
  
 
 disease_activity_threshold <- quantile(meta$activity_index[meta$diagnosis=="nonIBD"],na.rm = TRUE, 0.9)
 disease_activity_threshold
-eubiosis_lower_threshold <- quantile(meta$activity_index[meta$diagnosis=="nonIBD"],na.rm = TRUE, 0.1)
+eubiosis_lower_threshold <- quantile(meta$activity_index[meta$diagnosis=="nonIBD"],na.rm = TRUE, 0.1)/home/drkksharma/Desktop/Beta_diversity_analysis/taxa_diversity
 eubiosis_lower_threshold
 
-genus= read.csv('/home/drkksharma/Desktop/Beta_diversity_analysis/taxa_diversity/MTX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
+genus= read.csv('/path/to/MTX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
 
 #this is normal meta containing all samples
-meta= read.csv('/home/drkksharma/Desktop/Beta_diversity_analysis/MTX_combo_meta.txt', sep='\t', comment='', head=T)
+meta= read.csv('/path/to/MTX_combo_meta.txt', sep='\t', comment='', head=T)
 
 genus <- t(genus)
 genus <- genus[,colMeans(genus > 0) >= .1]
