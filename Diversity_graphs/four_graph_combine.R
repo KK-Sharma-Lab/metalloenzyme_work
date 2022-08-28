@@ -1,14 +1,14 @@
 library('vegan')
 
-#setwd("/path/to/working/directory/")
+#setwd("/home/pratik/Dissimilarity_graphs/")
 
-genus= read.csv('/path/to/MTX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
+genus= read.csv('/home/drkksharma/Documents/MTX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
 
-meta= read.csv('/path/to/MTX_combo_meta.txt', sep='\t', comment='', head=T)
+meta= read.csv('/home/drkksharma/Documents/MTX_combo_meta.txt', sep='\t', comment='', head=T)
 
-genus1= read.csv('/path/to/MGX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
+genus1= read.csv('/home/drkksharma/Documents/MGX_combo_genus_level.csv', sep='\t', comment=',', head=T, row.names=1)
 
-meta1= read.csv('/path/to/MGX_combo_meta.txt', sep='\t', comment='', head=T)
+meta1= read.csv('/home/drkksharma/Documents/MGX_combo_meta.txt', sep='\t', comment='', head=T)
 
 genus <- t(genus)
 dim(genus)
@@ -80,60 +80,61 @@ d.bray.uc1[is.na(d.bray.uc1)] <- 0
 d.bray.nonibd1 <- vegdist(genus_nonibd1, na.rm=TRUE)
 d.bray.nonibd1[is.na(d.bray.nonibd1)] <- 0
 
+
 #==========================================================================================#
-#
-#combining the graphs
-png("sex_merge_graph.png", width = 9, height = 8, units='in', res=900)
+
+#combining the graphs of sex
+png("/home/drkksharma/Desktop/sex_merge_graph.png", width = 9, height = 8, units='in', res=500)
 par(mfrow = c(2, 2), mar=c(4.5, 4, 3, 1.8), mgp=c(1.7, 0.8, 0))
 
 mod <- vegan::betadisper(as.dist(d.bray.nonibd), as.factor(nonibd$sex))
 op <- par(family = "serif")
 plot(mod, ellipse = TRUE, hull= FALSE, main="NONIBD ", sub=NULL, xlim = c(-0.3, 0.2), segments = FALSE, label = FALSE,  pch = c(19,19),cex.lab=0.7, cex.axis=0.7, col=c("indianred2", "steelblue2"))
 legend( 0.3,-0.3, legend=c("Female", "Male"), col=c("indianred2", "steelblue2"), box.lty=1, pch = c(19,19) )
-mtext('ANOVA p<0.01', side=1, line=3, cex=0.8)
+mtext('PERMANOVA p<0.001', side=1, line=3, cex=0.8)
 mtext('MTX', side=2, line=2.7, cex=1)
 
 mod <- vegan::betadisper(as.dist(d.bray.uc), as.factor(UC$sex))
 plot(mod, ellipse = TRUE, hull= FALSE, main=" UC ", sub=NULL, xlim = c(-0.3, 0.2), segments = FALSE, label = FALSE,  pch = c(19,19),cex.lab=0.7, cex.axis=0.7, col=c("indianred2", "steelblue2"))
 legend( 0.28,-0.4, legend=c("Female", "Male"), col=c("indianred2", "steelblue2"), box.lty=1, pch = c(19,19) )
-mtext('ANOVA p=0.068', side=1, line=3, cex=0.8)
+mtext('PERMANOVA p<0.001', side=1, line=3, cex=0.8)
 
 mod <- vegan::betadisper(as.dist(d.bray.nonibd1), as.factor(nonibd1$sex))
 plot(mod, ellipse = TRUE, hull= FALSE, main=" ", sub=NULL, xlim = c(-0.3, 0.2), segments = FALSE, label = FALSE,  pch = c(19,19),cex.lab=0.7, cex.axis=0.7, col=c("indianred2", "steelblue2"))
 legend( 0.3,-0.3, legend=c("Female", "Male"), col=c("indianred2", "steelblue2"), box.lty=1, pch = c(19,19) )
-mtext('ANOVA p<0.001', side=1, line=3, cex=0.8)
+mtext('PERMANOVA p<0.001', side=1, line=3, cex=0.8)
 mtext('MGX', side=2, line=2.7, cex=1)
 
 mod <- vegan::betadisper(as.dist(d.bray.uc1), as.factor(UC1$sex))
 plot(mod, ellipse = TRUE, hull= FALSE, main=" ", sub=NULL, xlim = c(-0.3, 0.2), segments = FALSE, label = FALSE,  pch = c(19,19),cex.lab=0.7, cex.axis=0.7, col=c("indianred2", "steelblue2"))
 legend( 0.25,-0.13, legend=c("Female", "Male"), col=c("indianred2", "steelblue2"), box.lty=1, pch = c(19,19) )
-mtext('ANOVA p<0.001', side=1, line=3,cex=0.8)
+mtext('PERMANOVA p<0.001', side=1, line=3,cex=0.8)
 dev.off()
 
 
 #combined graph of age_grp
-png("age_merge_graph.png", width = 9, height = 8, units='in', res=900)
+png("/home/drkksharma/Desktop/age_merge_graph.png", width = 9, height = 8, units='in', res=500)
 par(mfrow = c(2, 2), mar=c(4.5, 4, 3, 1.8), mgp=c(1.7, 0.8, 0))
 mod <- vegan::betadisper(as.dist(d.bray.nonibd), as.factor(nonibd$Age_grp))
 op <- par(family = "serif")
 plot(mod, ellipse = TRUE, hull= FALSE, main="NONIBD ", sub=NULL, xlim = c(-0.3, 0.2), segments = FALSE, label = FALSE,  pch = c(19,19,19), cex.lab=0.7, cex.axis=0.7, col=c("indianred2", "steelblue2", "palegreen3"))
 legend( 0.35,-0.3, legend=c("Adult", "Old", "Young"), col=c("indianred2", "steelblue2", "palegreen3"), box.lty=1, pch = c(19,19,19) )
-mtext('TukeyHSD \n Y-O padj<0.001,   Y-A padj<0.001,   A-O padj=0.076 ', side=1, line=3.5, cex=0.8)
+mtext('Pairwise PERMANOVA \n Y-O padj<0.01,   Y-A padj<0.01,   A-O padj=0.18 ', side=1, line=3.5, cex=0.8)
 mtext('MTX', side=2, line=2.7, cex=1)
 
 mod <- vegan::betadisper(as.dist(d.bray.uc), as.factor(UC$Age_grp))
 plot(mod, ellipse = TRUE, hull= FALSE, main=" UC ", sub=NULL, xlim = c(-0.3, 0.2), segments = FALSE, label = FALSE,  pch = c(19,19,19),cex.lab=0.7, cex.axis=0.7, col=c("indianred2", "steelblue2", "palegreen3"))
 legend( 0.3,-0.4, legend=c("Adult", "Old", "Young"), col=c("indianred2", "steelblue2", "palegreen3"), box.lty=1, pch = c(19,19,19) )
-mtext('TukeyHSD \n Y-O padj=0.95,   Y-A padj=0.23,   A-O padj=0.85 ', side=1, line=3.5, cex=0.8)
+mtext('Pairwise PERMANOVA \n Y-O padj=0.24,   Y-A padj<0.05,   A-O padj=0.9 ', side=1, line=3.5, cex=0.8)
 
 mod <- vegan::betadisper(as.dist(d.bray.nonibd1), as.factor(nonibd1$Age_grp))
 plot(mod, ellipse = TRUE, hull= FALSE, main=" ", sub=NULL, xlim = c(-0.3, 0.2), segments = FALSE, label = FALSE,  pch = c(19,19,19),cex.lab=0.7, cex.axis=0.7, col=c("indianred2", "steelblue2", "palegreen3"))
 legend( 0.35,-0.2, legend=c("Adult", "Old", "Young"), col=c("indianred2", "steelblue2", "palegreen3"), box.lty=1, pch = c(19,19,19) )
-mtext('TukeyHSD \n Y-O padj<0.01,   Y-A padj<0.001,   A-O padj=0.13 ', side=1, line=3.5, cex=0.8)
+mtext('Pairwise PERMANOVA \n Y-O padj<0.05,   Y-A padj<0.05,   A-O padj<0.05 ', side=1, line=3.5, cex=0.8)
 mtext('MGX', side=2, line=2.7, cex=1)
 
 mod <- vegan::betadisper(as.dist(d.bray.uc1), as.factor(UC1$Age_grp))
 plot(mod, ellipse = TRUE, hull= FALSE, main=" ", sub=NULL, xlim = c(-0.3, 0.2), segments = FALSE, label = FALSE,  pch = c(19,19,19),cex.lab=0.7, cex.axis=0.7, col=c("indianred2", "steelblue2", "palegreen3"))
 legend( 0.3,-0.1, legend=c("Adult", "Old", "Young"), col=c("indianred2", "steelblue2", "palegreen3"), box.lty=1, pch = c(19,19,19) )
-mtext('TukeyHSD \n Y-O padj<0.05,   Y-A padj=0.40,   A-O padj=0.63 ', side=1, line=3.5, cex=0.8)
+mtext('Pairwise PERMANOVA \n Y-O padj<0.05,   Y-A padj<0.05,   A-O padj<0.05 ', side=1, line=3.5, cex=0.8)
 dev.off()
